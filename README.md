@@ -1,2 +1,9 @@
 # Tetris2.0
-Tetris 2.0 spēle
+
+- [] Pievienot ainas
+- [] Uztaisīt ejošas pogas
+- [] Uztaisīt ejošu sākuma spēli
+- [] Uztaisīt ģenerētu laukumu
+- [] Var kustināt un nolikt figūras
+
+ 
