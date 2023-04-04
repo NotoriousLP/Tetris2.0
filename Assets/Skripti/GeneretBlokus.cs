@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class GeneretBlokus : MonoBehaviour {
 
-	// Use this for initialization
+	public GameObject[] Tetrominoes;
+
+
 	void Start () {
-		
+		jaunsTetromino ();
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
+	public void jaunsTetromino () {
+		Instantiate (Tetrominoes [Random.Range (0, Tetrominoes.Length)], transform.position, Quaternion.identity);
 	}
 }

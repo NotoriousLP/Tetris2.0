@@ -40,6 +40,8 @@ public class TetrisBloks : MonoBehaviour {
 			transform.position += new Vector3(0, -10, 0);
 			if (!derigsGajiens ()) {
 				transform.position -= new Vector3 (0, -10, 0);
+				this.enabled = false;
+				FindObjectOfType<GeneretBlokus>().jaunsTetromino();
 			}
 			pagLaiks = Time.time;
 		}
