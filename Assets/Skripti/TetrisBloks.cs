@@ -9,6 +9,7 @@ public class TetrisBloks : MonoBehaviour {
 	public float lidosanasLaiks = 0.8f;
 	public static int augstums = 1200;
 	public static int platums = 360;
+	private static Transform[,] grid = new Transform[platums, augstums];
 
 	// Use this for initialization
 	void Start () {
@@ -40,12 +41,23 @@ public class TetrisBloks : MonoBehaviour {
 			transform.position += new Vector3(0, -10, 0);
 			if (!derigsGajiens ()) {
 				transform.position -= new Vector3 (0, -10, 0);
+				addToGrid ();
 				this.enabled = false;
 				FindObjectOfType<GeneretBlokus>().jaunsTetromino();
 			}
 			pagLaiks = Time.time;
 		}
 	} 
+
+	void addToGrid(){
+		foreach (Transform children in transform) {
+			int roundedX = Mathf.RoundToInt(children.transform.position.x);
+			int roundedY = Mathf.RoundToInt(children.transform.position.y);
+
+
+			grid [roundedX, roundedY] = children;
+		}
+	}
 
 
 	bool derigsGajiens() {
@@ -56,6 +68,10 @@ public class TetrisBloks : MonoBehaviour {
 
 			if(roundedX < -280 || roundedX >=platums || roundedY < -520 || roundedY >= augstums){
 			   return false;
+			}
+
+			if (grid [roundedX, roundedY] != null) {
+				return false;
 			}
 		}
 
