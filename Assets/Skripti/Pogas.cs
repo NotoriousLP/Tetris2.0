@@ -12,5 +12,8 @@ public class Pogas : MonoBehaviour {
 	public void uzSpelesAinu() {
 		SceneManager.LoadScene ("spelesAina", LoadSceneMode.Single);
 	}
-
+	public void beigtSpeli(){
+		//Izies ārā no spēles
+		Application.Quit ();
+	}
 }
