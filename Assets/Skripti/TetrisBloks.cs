@@ -9,7 +9,7 @@ public class TetrisBloks : MonoBehaviour {
 	public float lidosanasLaiks = 0.8f;
 	public static int augstums = 20;
 	public static int platums = 10;
-	private static Transform[,] grid = new Transform[augstums, platums];
+	private static Transform[,] grid = new Transform[platums, augstums];
 
 	// Use this for initialization
 	void Start () {
@@ -22,7 +22,7 @@ public class TetrisBloks : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.LeftArrow)) {
 			transform.position += new Vector3 (-1, 0, 0);
 			if (!derigsGajiens ()) {
-				transform.position -= new Vector3 (-10, 0, 0);
+				transform.position -= new Vector3 (-1, 0, 0);
 			}
 			
 		} else if (Input.GetKeyDown (KeyCode.RightArrow)) {
@@ -43,31 +43,30 @@ public class TetrisBloks : MonoBehaviour {
 				transform.position -= new Vector3 (0, -1, 0);
 				this.enabled = false;
 				addToGrid ();
-				//parbauditRindas ();
+				parbauditRindas ();
 				FindObjectOfType<GeneretBlokus>().jaunsTetromino();
 			}
 			pagLaiks = Time.time;
 		}
 	} 
 
-	/*void parbauditRindas(){
+	void parbauditRindas(){
 		for (int i = augstums - 1; i >= 0; i--) {
 			if (rindaIr (i)) {
+				Debug.Log (rindaIr(i));
 				dzestRindu (i);
 				rindasPaz (i);
 			}
 		}
-	}*/
+	}
 
-	/*bool rindaIr(int i)
+	bool rindaIr(int i)
 	{
 		for (int j = 0; j < platums; j++) {
-			if (grid [j, i] == null) {
-				return false;
-			}
-			return true;
+			if (grid [j, i] == null) return false;
 		}
-	}*/
+		return true;
+	}
 
 	void dzestRindu(int i){
 		for (int j = 0; j < platums; j++) {
@@ -78,8 +77,10 @@ public class TetrisBloks : MonoBehaviour {
 
 	void rindasPaz(int i){
 		for (int y = i; y < augstums; y++) {
+			
 			for (int j = 0; j < platums; j++) {
 				if (grid [j, y] != null) {
+					
 					grid [j, y - 1] = grid [j, y];
 					grid [j, y] = null;
 					grid [j, y - 1].transform.position = new Vector3 (0, 1, 0);
