@@ -16,4 +16,7 @@ public class Pogas : MonoBehaviour {
 		//Izies ārā no spēles
 		Application.Quit ();
 	}
+	public void uzGalvenoIzvelni(){
+		SceneManager.LoadScene ("galvenaIzvelne", LoadSceneMode.Single);
+	}
 }

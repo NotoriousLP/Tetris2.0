@@ -30,10 +30,15 @@ public class TetrisBloks : MonoBehaviour {
 			if (!derigsGajiens ()) {
 				transform.position -= new Vector3 (1, 0, 0);
 			}
-		} else if (Input.GetKeyDown (KeyCode.UpArrow)) {
+		} else if (Input.GetKeyDown (KeyCode.Z)) {
 			transform.RotateAround (transform.TransformPoint(rotacijasPunkts), new Vector3 (0, 0, 1), 90);
 			if (!derigsGajiens ()) {
 				transform.RotateAround (transform.TransformPoint(rotacijasPunkts), new Vector3 (0, 0, 1), -90);
+			}
+		}else if (Input.GetKeyDown (KeyCode.X)) {
+			transform.RotateAround (transform.TransformPoint(rotacijasPunkts), new Vector3 (0, 0, 1), -90);
+			if (!derigsGajiens ()) {
+				transform.RotateAround (transform.TransformPoint(rotacijasPunkts), new Vector3 (0, 0, 1), 90);
 			}
 		}
 
