@@ -56,14 +56,17 @@ public class TetrisBloks : MonoBehaviour {
 	} 
 
 	void parbauditRindas(){
-		for (int i = augstums - 1; i >= 0; i--) {
-			if (rindaIr (i)) {
-				Debug.Log (rindaIr(i));
-				dzestRindu (i);
-				rindasPaz (i);
-			}
-		}
-	}
+    int clearedRows = 1;
+    while (clearedRows > 0) {
+        clearedRows = 0;
+        for (int i = augstums - 1; i >= 0; i--) {
+            if (rindaIr (i)) {
+                clearedRows++;
+                dzestRindu (i);
+            }
+        }
+    }
+}
 
 	bool rindaIr(int i)
 	{
@@ -73,12 +76,30 @@ public class TetrisBloks : MonoBehaviour {
 		return true;
 	}
 
-	void dzestRindu(int i){
-		for (int j = 0; j < platums; j++) {
-			Destroy (grid [j, i].gameObject);
-			grid [j, i] = null;
-		}
-	}
+int dzestRindu(int i){
+    int clearedRows = 0;
+    for (int j = 0; j < platums; j++) {
+        Destroy (grid [j, i].gameObject);
+        grid [j, i] = null;
+    }
+
+    for (int y = i + 1; y < augstums; y++) {
+        for (int j = 0; j < platums; j++) {
+            if (grid [j, y] != null) {
+                grid [j, y - 1] = grid [j, y];
+                grid [j, y] = null;
+                grid [j, y - 1].transform.position -= new Vector3(0, 1, 0);
+            }
+        }
+    }
+   
+    for (int y = i; y < augstums; y++) {
+        if (rindaIr (y)) {
+            clearedRows++;
+        }
+    }
+    return clearedRows;
+}
 
 	void rindasPaz(int i){
 		for (int y = i; y < augstums; y++) {
@@ -88,7 +109,7 @@ public class TetrisBloks : MonoBehaviour {
 					
 					grid [j, y - 1] = grid [j, y];
 					grid [j, y] = null;
-					grid [j, y - 1].transform.position = new Vector3 (0, 1, 0);
+					grid [j, y - 1].transform.position = new Vector3 (0, -1, 0);
 				}
 			}
 		}

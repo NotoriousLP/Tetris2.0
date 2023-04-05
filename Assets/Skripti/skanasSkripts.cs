@@ -30,6 +30,7 @@ public class skanasSkripts : MonoBehaviour {
     // and sets it as musicValue
     public void SetVolume(float vol)
     {
+		
         musicVolume = vol;
     }
 
