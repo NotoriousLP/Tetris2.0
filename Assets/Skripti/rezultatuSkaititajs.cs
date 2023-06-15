@@ -7,6 +7,8 @@ public class rezultatuSkaititajs : MonoBehaviour {
 
 	public Text rezultatuTeksts;
 
+	public Text rezTabTeksts;
+
 	public TetrisBloks tetrisBloks;
 
 	public int rezultats;
@@ -22,6 +24,7 @@ public class rezultatuSkaititajs : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		rezultatuTeksts.text = "Rezultāts: " + rezultats;
+		rezTabTeksts.text = "Tavi punkti: " + rezultats;
 	}
 
 	public void pievienotPunktus(int rindasNotiritas)

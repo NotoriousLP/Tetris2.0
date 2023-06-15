@@ -1,8 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-
+using UnityEngine.UI;
 
 public class TetrisBloks : MonoBehaviour {
 
@@ -18,6 +17,8 @@ public class TetrisBloks : MonoBehaviour {
 
 	public rezultatuSkaititajs rezultatuskaititajs;
 
+	public Objekti objekti;
+
 	public bool speleBeigusies = false;
 
 	private void Awake()
@@ -29,6 +30,7 @@ public class TetrisBloks : MonoBehaviour {
 		konfiguretSpeli (grutibasLimenis);
 		rezultatuskaititajs = FindObjectOfType<rezultatuSkaititajs>();
 		generetBlokus = FindObjectOfType<GeneretBlokus>();
+		objekti = FindObjectOfType<Objekti> ();
 	}
 
 
@@ -133,18 +135,23 @@ public class TetrisBloks : MonoBehaviour {
 		{
 			int roundedX = Mathf.RoundToInt(child.transform.position.x);
 			int roundedY = Mathf.RoundToInt(child.transform.position.y);
-			Debug.Log (roundedX + " " + roundedY);
+
+
 			if (roundedX < 0 || roundedX >= platums || roundedY < 0 || roundedY >= augstums)
 			{
 				speleBeigusies = true;
 				generetBlokus.Generetais.SetActive (false);
+				objekti.spelesPanelis.SetActive (true);
+				objekti.speleBeidzas.SetActive (true);
+				objekti.segVards.gameObject.SetActive (true);
+				objekti.okPoga.gameObject.SetActive (true);
+				objekti.tekstsNr2.SetActive (true);
+				rezultatuskaititajs.rezTabTeksts.gameObject.SetActive(true);
 				return;
 			}
+
 		}
 	}
-
-
-		
 
 	void parbauditRindas()
 	{
