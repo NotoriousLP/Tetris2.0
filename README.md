@@ -2,8 +2,9 @@
 
 - [x] Pievienot ainas
 - [x] Uztaisīt ejošas pogas
-- [ ] Uztaisīt ejošu sākuma spēli
+- [x] Uztaisīt ejošu sākuma spēli
 - [ ] Uztaisīt ģenerētu laukumu
-- [ ] Var kustināt un nolikt figūras
+- [x] Var kustināt un nolikt figūras
+- [x] Notīrās laukums
 
  
