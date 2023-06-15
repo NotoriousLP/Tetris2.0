@@ -14,9 +14,11 @@ public class TetrisBloks : MonoBehaviour {
 	private static Transform[,] grid = new Transform[platums, augstums];
 	public int grutibasLimenis;
 
-	private GeneretBlokus generetBlokus;
+	public GeneretBlokus generetBlokus;
 
 	public rezultatuSkaititajs rezultatuskaititajs;
+
+	public bool speleBeigusies = false;
 
 	private void Awake()
 	{
@@ -26,6 +28,7 @@ public class TetrisBloks : MonoBehaviour {
 	void Start () {
 		konfiguretSpeli (grutibasLimenis);
 		rezultatuskaititajs = FindObjectOfType<rezultatuSkaititajs>();
+		generetBlokus = FindObjectOfType<GeneretBlokus>();
 	}
 
 
@@ -82,73 +85,66 @@ public class TetrisBloks : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-		if (Input.GetKeyDown (KeyCode.LeftArrow)) {
-			transform.position += new Vector3 (-1, 0, 0);
-			if (!derigsGajiens ()) {
-				transform.position -= new Vector3 (-1, 0, 0);
-			}
+		if (!speleBeigusies) {
+			if (Input.GetKeyDown (KeyCode.LeftArrow)) {
+				transform.position += new Vector3 (-1, 0, 0);
+				if (!derigsGajiens ()) {
+					transform.position -= new Vector3 (-1, 0, 0);
+				}
 			
-		} else if (Input.GetKeyDown (KeyCode.RightArrow)) {
-			transform.position += new Vector3 (1, 0, 0);
-			if (!derigsGajiens ()) {
-				transform.position -= new Vector3 (1, 0, 0);
+			} else if (Input.GetKeyDown (KeyCode.RightArrow)) {
+				transform.position += new Vector3 (1, 0, 0);
+				if (!derigsGajiens ()) {
+					transform.position -= new Vector3 (1, 0, 0);
+				}
+			} else if (Input.GetKeyDown (KeyCode.Z)) {
+				transform.RotateAround (transform.TransformPoint (rotacijasPunkts), new Vector3 (0, 0, 1), 90);
+				if (!derigsGajiens ()) {
+					transform.RotateAround (transform.TransformPoint (rotacijasPunkts), new Vector3 (0, 0, 1), -90);
+				}
+			} else if (Input.GetKeyDown (KeyCode.X)) {
+				transform.RotateAround (transform.TransformPoint (rotacijasPunkts), new Vector3 (0, 0, 1), -90);
+				if (!derigsGajiens ()) {
+					transform.RotateAround (transform.TransformPoint (rotacijasPunkts), new Vector3 (0, 0, 1), 90);
+				}
 			}
-		} else if (Input.GetKeyDown (KeyCode.Z)) {
-			transform.RotateAround (transform.TransformPoint(rotacijasPunkts), new Vector3 (0, 0, 1), 90);
-			if (!derigsGajiens ()) {
-				transform.RotateAround (transform.TransformPoint(rotacijasPunkts), new Vector3 (0, 0, 1), -90);
-			}
-		}else if (Input.GetKeyDown (KeyCode.X)) {
-			transform.RotateAround (transform.TransformPoint(rotacijasPunkts), new Vector3 (0, 0, 1), -90);
-			if (!derigsGajiens ()) {
-				transform.RotateAround (transform.TransformPoint(rotacijasPunkts), new Vector3 (0, 0, 1), 90);
-			}
-		}else if (Input.GetKeyDown(KeyCode.Space))
-		{
-			Vector3 previousPosition = transform.position;
 
-			while (derigsGajiens())
-			{
-				transform.position += new Vector3(0, -1, 0);
-			}
-				
-			transform.position += new Vector3(0, 1, 0);
+			float tagadejaisAtrums = Input.GetKey (KeyCode.DownArrow) ? lidosanasLaiks / 10 : lidosanasLaiks;
+			if (Time.time - pagLaiks > tagadejaisAtrums) {
+				transform.position += new Vector3 (0, -1, 0);
 
+				if (!derigsGajiens ()) {
+					transform.position -= new Vector3 (0, -1, 0);
+					this.enabled = false;
+					addToGrid ();
+					FindObjectOfType<GeneretBlokus> ().jaunsTetromino ();
+					parbauditRindas ();
+					parbauditSpelesBeigas ();
+				}
 
-			if (derigsGajiens())
-			{
-				addToGrid();
-				parbauditRindas();
-				FindObjectOfType<GeneretBlokus>().jaunsTetromino();
-			}
-			else
-			{
-
-				transform.position = previousPosition;
+				pagLaiks = Time.time;
 			}
 		}
-
-			
-		float currentSpeed = Input.GetKey(KeyCode.DownArrow) ? lidosanasLaiks / 10 : lidosanasLaiks;
-		if (Time.time - pagLaiks > currentSpeed)
-		{
-			transform.position += new Vector3(0, -1, 0);
-
-			if (!derigsGajiens())
-			{
-				transform.position -= new Vector3(0, -1, 0);
-				this.enabled = false;
-				addToGrid();
-				FindObjectOfType<GeneretBlokus>().jaunsTetromino();
-				parbauditRindas();
-			}
-
-			pagLaiks = Time.time;
-		}
-
 	} 
 
+	void parbauditSpelesBeigas()
+	{
+		foreach (Transform child in transform)
+		{
+			int roundedX = Mathf.RoundToInt(child.transform.position.x);
+			int roundedY = Mathf.RoundToInt(child.transform.position.y);
+			Debug.Log (roundedX + " " + roundedY);
+			if (roundedX < 0 || roundedX >= platums || roundedY < 0 || roundedY >= augstums)
+			{
+				speleBeigusies = true;
+				generetBlokus.Generetais.SetActive (false);
+				return;
+			}
+		}
+	}
+
+
+		
 
 	void parbauditRindas()
 	{

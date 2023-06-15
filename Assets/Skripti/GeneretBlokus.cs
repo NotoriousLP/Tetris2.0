@@ -5,7 +5,7 @@ using UnityEngine;
 public class GeneretBlokus : MonoBehaviour
 {
 	public GameObject[] Tetrominoes;
-
+	public GameObject Generetais;
 
 	void Start () {
 		jaunsTetromino ();
