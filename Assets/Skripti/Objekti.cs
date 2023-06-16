@@ -4,21 +4,28 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Objekti : MonoBehaviour {
-
-	public GameObject spelesPanelis;
-	public GameObject speleBeidzas;
-	public InputField segVards;
-	public Button okPoga;
-	public GameObject tekstsNr2;
-
-	public GameObject rezTeksts;
-	public GameObject rezApko;
-
+	
+	//Priekš spēles funkcijas
 	public int reizesNotiritsLauks = 0;
 	public bool speleBeigusies = false;
 
 	public int spelesGrutiba;
 
+
+	//Priekš tabulas, kad spēle beidzās
+	public GameObject spelesPanelis;
+	public GameObject speleBeidzas;
+	public InputField segVards;
+	public Button okPoga;
+	public GameObject tekstsNr2;
+	public GameObject rezTeksts;
+	public GameObject rezApko;
+	public GameObject rezultatuRaksts;
+	public Button tabulasIziesana;
+
+
+
+	//Lai var izdabūt grūtību spēlei.
 	void Awake(){
 		spelesGrutiba = PlayerPrefs.GetInt("Grutiba");
 	}
