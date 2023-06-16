@@ -18,13 +18,6 @@ public class TetrisBloks : MonoBehaviour {
 
 	public Objekti objekti;
 
-	public int grutibasLimenis;
-
-	private void Awake()
-	{
-		//grutibasLimenis = PlayerPrefs.GetInt("Grutiba"); //Grūtības pakāpe, ko ņem no grutibasIzvele.cs
-	}
-
 	void Start () {
 		rezultatuskaititajs = FindObjectOfType<rezultatuSkaititajs>();
 		generetBlokus = FindObjectOfType<GeneretBlokus>();
@@ -87,6 +80,18 @@ public class TetrisBloks : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (!objekti.speleBeigusies) {
+
+			if (Input.GetKeyDown(KeyCode.Space) && !objekti.spaceNospiests)
+			{
+				objekti.spaceNospiests = true;
+				objekti.spaceSpiezLaiks = Time.time;
+			}
+				
+			if (objekti.spaceNospiests && Time.time - objekti.spaceSpiezLaiks >= 1f) {
+				StartCoroutine(uzreizBlokuKrisana());
+				objekti.spaceNospiests = false;
+			}
+
 			if (Input.GetKeyDown (KeyCode.LeftArrow)) {
 				transform.position += new Vector3 (-1, 0, 0);
 				if (!derigsGajiens ()) {
@@ -126,7 +131,34 @@ public class TetrisBloks : MonoBehaviour {
 				pagLaiks = Time.time;
 			}
 		}
+			
 	} 
+
+	IEnumerator uzreizBlokuKrisana() //Pašreiz daļēji strādā
+	{
+		while (derigsGajiens())
+		{
+			transform.position += new Vector3(0, -1, 0);
+			if (!derigsGajiens()) 
+			{
+				transform.position -= new Vector3(0, -1, 0); 
+				break; 
+			}
+			yield return null; 
+		}
+
+		this.enabled = false;
+		addToGrid();
+		FindObjectOfType<GeneretBlokus> ().jaunsTetromino ();
+		parbauditRindas();
+		parbauditSpelesBeigas();
+		pagLaiks = Time.time;
+	}
+
+	void IeslegtSpace(){
+		//objekti.varIzmantotSpace = true;
+		Debug.Log ("Space ieslēdzās");
+	}
 
 	void parbauditSpelesBeigas()
 	{

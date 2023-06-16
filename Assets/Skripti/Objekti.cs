@@ -8,6 +8,11 @@ public class Objekti : MonoBehaviour {
 	//Priekš spēles funkcijas
 	public int reizesNotiritsLauks = 0;
 	public bool speleBeigusies = false;
+	public bool irNolikts = false;
+
+	public bool spaceNospiests;
+	public float spaceSpiezLaiks;
+
 
 	public int spelesGrutiba;
 
