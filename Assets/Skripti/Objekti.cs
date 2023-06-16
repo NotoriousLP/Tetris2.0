@@ -8,6 +8,19 @@ public class Objekti : MonoBehaviour {
 	public GameObject spelesPanelis;
 	public GameObject speleBeidzas;
 	public InputField segVards;
-	public InputField okPoga;
+	public Button okPoga;
 	public GameObject tekstsNr2;
+
+	public GameObject rezTeksts;
+	public GameObject rezApko;
+
+	public int reizesNotiritsLauks = 0;
+	public bool speleBeigusies = false;
+
+	public int spelesGrutiba;
+
+	void Awake(){
+		spelesGrutiba = PlayerPrefs.GetInt("Grutiba");
+	}
+
 }

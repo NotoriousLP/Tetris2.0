@@ -11,6 +11,8 @@ public class rezultatuSkaititajs : MonoBehaviour {
 
 	public TetrisBloks tetrisBloks;
 
+	public Objekti objekti;
+
 	public int rezultats;
 
 	void Start(){
@@ -33,7 +35,7 @@ public class rezultatuSkaititajs : MonoBehaviour {
 		int bazesRezultats = 0;
 		int pievienotRezultatam = 0;
 
-		switch (tetrisBloks.grutibasLimenis)
+		switch (objekti.spelesGrutiba)
 		{
 		case 1: //ļoti viegls
 			bazesRezultats = 200;
@@ -58,7 +60,6 @@ public class rezultatuSkaititajs : MonoBehaviour {
 		pievienotRezultatam = bazesRezultats + (rindasNotiritas - 1) * rezultatuReizinatajs;
 		ieliktPunktusRez(pievienotRezultatam);
 	}
-
 	public void ieliktPunktusRez(int punkti)
 	{
 		rezultats = rezultats + punkti;

@@ -11,7 +11,6 @@ public class TetrisBloks : MonoBehaviour {
 	public static int augstums = 20;
 	public static int platums = 10;
 	private static Transform[,] grid = new Transform[platums, augstums];
-	public int grutibasLimenis;
 
 	public GeneretBlokus generetBlokus;
 
@@ -19,18 +18,18 @@ public class TetrisBloks : MonoBehaviour {
 
 	public Objekti objekti;
 
-	public bool speleBeigusies = false;
+	public int grutibasLimenis;
 
 	private void Awake()
 	{
-		grutibasLimenis = PlayerPrefs.GetInt("Grutiba"); //Grūtības pakāpe, ko ņem no grutibasIzvele.cs
+		//grutibasLimenis = PlayerPrefs.GetInt("Grutiba"); //Grūtības pakāpe, ko ņem no grutibasIzvele.cs
 	}
 
 	void Start () {
-		konfiguretSpeli (grutibasLimenis);
 		rezultatuskaititajs = FindObjectOfType<rezultatuSkaititajs>();
 		generetBlokus = FindObjectOfType<GeneretBlokus>();
 		objekti = FindObjectOfType<Objekti> ();
+		konfiguretSpeli (objekti.spelesGrutiba);
 	}
 
 
@@ -87,7 +86,7 @@ public class TetrisBloks : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (!speleBeigusies) {
+		if (!objekti.speleBeigusies) {
 			if (Input.GetKeyDown (KeyCode.LeftArrow)) {
 				transform.position += new Vector3 (-1, 0, 0);
 				if (!derigsGajiens ()) {
@@ -139,7 +138,7 @@ public class TetrisBloks : MonoBehaviour {
 
 			if (roundedX < 0 || roundedX >= platums || roundedY < 0 || roundedY >= augstums)
 			{
-				speleBeigusies = true;
+				objekti.speleBeigusies = true;
 				generetBlokus.Generetais.SetActive (false);
 				objekti.spelesPanelis.SetActive (true);
 				objekti.speleBeidzas.SetActive (true);
@@ -163,8 +162,15 @@ public class TetrisBloks : MonoBehaviour {
 				if (rindaIr(i))
 				{
 					clearedRows++;
+					objekti.reizesNotiritsLauks++;
 					dzestRindu(i);
 				}
+			}
+			Debug.Log (objekti.reizesNotiritsLauks);
+			if (objekti.reizesNotiritsLauks == 1) {
+				objekti.spelesGrutiba++;
+				Debug.Log ("Nomainās gŗūtība");
+				objekti.reizesNotiritsLauks = 0;
 			}
 
 			if (clearedRows == 0)
