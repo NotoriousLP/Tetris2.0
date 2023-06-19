@@ -6,5 +6,7 @@
 - [ ] Uztaisīt ģenerētu laukumu
 - [x] Var kustināt un nolikt figūras
 - [x] Notīrās laukums
-
+- [x] Punktu sistēma pievienota
+- [ ] Turēšanas sistēma ievietota
+- [ ] Skaņas sistēma
  
