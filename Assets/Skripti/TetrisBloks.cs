@@ -9,7 +9,7 @@ public class TetrisBloks : MonoBehaviour {
 	private float pagLaiks;
 	public float lidosanasLaiks = 0.8f;
 	public static int augstums = 20;
-	public static int platums = 10;
+	public static int platums = 15;
 	private static Transform[,] grid = new Transform[platums, augstums];
 
 	public GeneretBlokus generetBlokus;
@@ -22,6 +22,7 @@ public class TetrisBloks : MonoBehaviour {
 		rezultatuskaititajs = FindObjectOfType<rezultatuSkaititajs>();
 		generetBlokus = FindObjectOfType<GeneretBlokus>();
 		objekti = FindObjectOfType<Objekti> ();
+
 		konfiguretSpeli (objekti.spelesGrutiba);
 	}
 
@@ -76,19 +77,42 @@ public class TetrisBloks : MonoBehaviour {
 		}
 	}
 
+	void uzreizBlokuKrisana()
+	{
+		while (derigsGajiens())
+		{
+			transform.position += new Vector3(0, -1, 0);
+			if (!derigsGajiens())
+			{
+				transform.position -= new Vector3(0, -1, 0);
+				break;
+			}
+		}
+
+		this.enabled = false;
+		addToGrid();
+		FindObjectOfType<GeneretBlokus>().jaunsTetromino();
+		parbauditRindas();
+		parbauditSpelesBeigas();
+		pagLaiks = Time.time;
+	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (!objekti.speleBeigusies) {
 
-			if (Input.GetKeyDown(KeyCode.Space) && !objekti.spaceNospiests)
+			if (Input.GetKeyDown(KeyCode.Space))
 			{
-				objekti.spaceNospiests = true;
-				objekti.spaceSpiezLaiks = Time.time;
+				while (derigsGajiens()) {
+					transform.position += new Vector3 (0, -1, 0);
+				}
+				transform.position += new Vector3 (0, 1, 0);
+
+				addToGrid ();
 			}
 				
-			if (objekti.spaceNospiests && Time.time - objekti.spaceSpiezLaiks >= 1f) {
-				StartCoroutine(uzreizBlokuKrisana());
+			if (objekti.spaceNospiests && Time.time - objekti.spaceSpiezLaiks >= 1f)
+			{
 				objekti.spaceNospiests = false;
 			}
 
@@ -131,34 +155,8 @@ public class TetrisBloks : MonoBehaviour {
 				pagLaiks = Time.time;
 			}
 		}
-			
-	} 
-
-	IEnumerator uzreizBlokuKrisana() //Pašreiz daļēji strādā
-	{
-		while (derigsGajiens())
-		{
-			transform.position += new Vector3(0, -1, 0);
-			if (!derigsGajiens()) 
-			{
-				transform.position -= new Vector3(0, -1, 0); 
-				break; 
-			}
-			yield return null; 
-		}
-
-		this.enabled = false;
-		addToGrid();
-		FindObjectOfType<GeneretBlokus> ().jaunsTetromino ();
-		parbauditRindas();
-		parbauditSpelesBeigas();
-		pagLaiks = Time.time;
 	}
-
-	void IeslegtSpace(){
-		//objekti.varIzmantotSpace = true;
-		Debug.Log ("Space ieslēdzās");
-	}
+		
 
 	void parbauditSpelesBeigas()
 	{
@@ -195,9 +193,12 @@ public class TetrisBloks : MonoBehaviour {
 				{
 					clearedRows++;
 					objekti.reizesNotiritsLauks++;
+					objekti.reizesNotiritsTekstam++;
 					dzestRindu(i);
 				}
 			}
+
+
 			Debug.Log (objekti.reizesNotiritsLauks);
 			if (objekti.reizesNotiritsLauks == 12) {
 				objekti.spelesGrutiba++;

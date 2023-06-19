@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class GeneretBlokus : MonoBehaviour
 {
-	public GameObject[] Tetrominoes;
+	public GameObject[] Tetrominos;
 	public GameObject Generetais;
+
 
 	void Start () {
 		jaunsTetromino ();
@@ -13,10 +14,8 @@ public class GeneretBlokus : MonoBehaviour
 
 	// Update is called once per frame
 	public void jaunsTetromino () {
-		Instantiate (Tetrominoes [Random.Range (0, Tetrominoes.Length)], transform.position, Quaternion.identity);
+		Instantiate (Tetrominos [Random.Range (0, Tetrominos.Length)], transform.position, Quaternion.identity);
 	}
-		
-
 
 
 }

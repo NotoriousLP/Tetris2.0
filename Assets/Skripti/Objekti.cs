@@ -4,13 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Objekti : MonoBehaviour {
-	
+
 	//Priekš spēles funkcijas
 	public int reizesNotiritsLauks = 0;
+	public int reizesNotiritsTekstam = 0;
 	public bool speleBeigusies = false;
 	public bool irNolikts = false;
 
-	public bool spaceNospiests;
+	public bool spaceNospiests = false;
 	public float spaceSpiezLaiks;
 
 
