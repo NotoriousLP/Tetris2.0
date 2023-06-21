@@ -30,15 +30,19 @@ public class rezultatuSkaititajs : MonoBehaviour {
 			bazesRezultats = 200;
 			break;
 		case 2: //viegls
+			rezultatuReizinatajs = 150;
 			bazesRezultats = 300;
 			break;
 		case 3: //Normāls
+			rezultatuReizinatajs = 200;
 			bazesRezultats = 400;
 			break;
 		case 4: //Grūts
+			rezultatuReizinatajs = 250;
 			bazesRezultats = 500;
 			break;
 		case 5: //Ļoti grūts
+			rezultatuReizinatajs = 400;
 			bazesRezultats = 700;
 			break;
 		case 6: //Neiespējami

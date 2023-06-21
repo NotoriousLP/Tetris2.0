@@ -201,10 +201,10 @@ public class TetrisBloks : MonoBehaviour {
 
 
 			Debug.Log (objekti.reizesNotiritsLauks);
-			if (objekti.reizesNotiritsLauks >= 15) {
+			if (objekti.reizesNotiritsLauks >= 10) {
 				objekti.spelesGrutiba++;
-				Debug.Log ("Nomainās gŗūtība");
-				Debug.Log (objekti.reizesNotiritsLauks);
+				//Debug.Log ("Nomainās gŗūtība");
+				//Debug.Log (objekti.reizesNotiritsLauks);
 				objekti.reizesNotiritsLauks = 0;
 			}
 
