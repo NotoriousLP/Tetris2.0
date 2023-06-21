@@ -25,25 +25,25 @@ public class Teksti : MonoBehaviour {
 		objekti = FindObjectOfType<Objekti> ();
 		tetrisBloks = FindObjectOfType<TetrisBloks>();
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-		rezultatuTeksts.text = "Rezultāts: " + rezultatuskaititajs.rezultats; 
-		izdzestasRindas.text = "Izdzēstas rindas: " + objekti.reizesNotiritsTekstam;
+		rezultatuTeksts.text = "Punkti: " + rezultatuskaititajs.rezultats; 
+		izdzestasRindas.text = "Rindas: " + objekti.reizesNotiritsTekstam;
 		rezTabTeksts.text = "Tavi punkti: " + rezultatuskaititajs.rezultats;
 		switch (objekti.spelesGrutiba) {
 		case 1:
-			grutiba.text = "Grūtiba: Ļoti viegla";
+			grutiba.text = "Grūtíba: Ļoti viegla";
 			break;
-		case 2: grutiba.text = "Grūtiba: Viegla"; 
+		case 2: grutiba.text = "Grūtíba: Viegla"; 
 			break;
-		case 3: grutiba.text = "Grūtiba: Normāla"; 
+		case 3: grutiba.text = "Grūtíba: Normāla"; 
 			break;
-		case 4: grutiba.text = "Grūtiba: Grūta"; 
+		case 4: grutiba.text = "Grūtíba: Grūta"; 
 			break;
-		case 5: grutiba.text = "Grūtiba: Ļoti grūta"; 
+		case 5: grutiba.text = "Grūtíba: Ļoti grūta"; 
 			break;
-		case 6: grutiba.text = "Grūtiba: Neiespējami"; 
+		case 6: grutiba.text = "Grūtíba: Neiespējami"; 
 			break;
 		}
 	}
