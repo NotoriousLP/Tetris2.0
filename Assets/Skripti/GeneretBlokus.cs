@@ -7,15 +7,14 @@ public class GeneretBlokus : MonoBehaviour
 	public GameObject[] Tetrominos;
 	public GameObject Generetais;
 
-
 	void Start () {
-		jaunsTetromino ();
+		jaunsTetromino (); //Ar šo startu uzsāk Bloku uzģenerēšanu
 	}
 
-	// Update is called once per frame
+
 	public void jaunsTetromino () {
-		Instantiate (Tetrominos [Random.Range (0, Tetrominos.Length)], transform.position, Quaternion.identity);
+		//Šī rinda, uztaisa nejaušu tetromino no GameObject[] Tetromino objektiem.
+		Instantiate (Tetrominos [Random.Range (0, Tetrominos.Length)], transform.position, Quaternion.identity); 
 	}
-
-
 }
+

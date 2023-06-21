@@ -3,10 +3,8 @@
 - [x] Pievienot ainas
 - [x] Uztaisīt ejošas pogas
 - [x] Uztaisīt ejošu sākuma spēli
-- [ ] Uztaisīt ģenerētu laukumu
 - [x] Var kustināt un nolikt figūras
 - [x] Notīrās laukums
 - [x] Punktu sistēma pievienota
-- [ ] Turēšanas sistēma ievietota
-- [ ] Skaņas sistēma
+- [x] Skaņas sistēma
  

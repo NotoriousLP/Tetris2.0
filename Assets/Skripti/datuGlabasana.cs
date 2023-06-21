@@ -11,7 +11,7 @@ public class datuGlabasana : MonoBehaviour {
 
 	public Objekti objekti;
 	public rezultatuSkaititajs rezultatskaititajs;
-
+	public Teksti teksti;
 
 	public Text segVarduTeksts;
 	public Text punktuTeksts;
@@ -24,10 +24,11 @@ public class datuGlabasana : MonoBehaviour {
 	private string dbName = "URI=file:rezultati.db";
 
 	void Start(){
+		teksti = FindObjectOfType<Teksti> ();
 		createDB ();
 	}
 
-
+	//Uztaisa datubāzi
 	public void createDB(){
 		using (var connection = new SqliteConnection (dbName)) {
 			connection.Open();
@@ -41,6 +42,7 @@ public class datuGlabasana : MonoBehaviour {
 		}
 	}
 
+	//Šī funkcija pievieno datus datubāzē.
 	public void pievienotDatus(){
 		if (objekti.segVards == null) {
 			Debug.LogError("Nav visi dati");
@@ -62,8 +64,7 @@ public class datuGlabasana : MonoBehaviour {
 		objekti.segVards.gameObject.SetActive (false);
 		objekti.okPoga.gameObject.SetActive (false);
 		objekti.tekstsNr2.SetActive (false);
-		rezultatskaititajs.rezTabTeksts.gameObject.SetActive(false);
-		objekti.rezTeksts.SetActive (false);
+		teksti.rezTabTeksts.gameObject.SetActive(false);
 		objekti.rezApko.SetActive (true);
 		objekti.rezultatuRaksts.SetActive (true);
 		objekti.tabulasIziesana.gameObject.SetActive (true);

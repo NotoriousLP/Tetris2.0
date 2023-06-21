@@ -12,16 +12,19 @@ public class TetrisBloks : MonoBehaviour {
 	public static int platums = 15;
 	private static Transform[,] grid = new Transform[platums, augstums];
 
+
+	//Mainīgie, lai var izdabūt citus objektus no citiem skriptiem
 	public GeneretBlokus generetBlokus;
-
 	public rezultatuSkaititajs rezultatuskaititajs;
-
 	public Objekti objekti;
+	public Teksti teksti;
 
 	void Start () {
+		//Sameklē visus objektus no citiem skriptiem, savādāk nekas nestrādās
 		rezultatuskaititajs = FindObjectOfType<rezultatuSkaititajs>();
 		generetBlokus = FindObjectOfType<GeneretBlokus>();
 		objekti = FindObjectOfType<Objekti> ();
+		teksti = FindObjectOfType<Teksti> ();
 
 		konfiguretSpeli (objekti.spelesGrutiba);
 
@@ -65,15 +68,15 @@ public class TetrisBloks : MonoBehaviour {
 		case 1:
 			return 0.7f;
 		case 2:
-			return 0.5f;
+			return 0.6f;
 		case 3:
-			return 0.3f;
+			return 0.5f;
 		case 4:
-			return 0.2f;
+			return 0.4f;
 		case 5:
 			return 0.2f;
 		case 6:
-			return 0.05f;
+			return 0.1f;
 		default:
 			return 0.2f;
 		}
@@ -135,7 +138,6 @@ public class TetrisBloks : MonoBehaviour {
 					addToGrid ();
 					FindObjectOfType<GeneretBlokus> ().jaunsTetromino ();
 					parbauditRindas ();
-					parbauditRindasIntensitati ();
 					parbauditSpelesBeigas ();
 				}
 
@@ -145,26 +147,6 @@ public class TetrisBloks : MonoBehaviour {
 	}
 		
 
-	void parbauditRindasIntensitati()
-	{
-		foreach (Transform child in transform)
-		{
-			int roundedX = Mathf.RoundToInt(child.transform.position.x);
-			int roundedY = Mathf.RoundToInt(child.transform.position.y);
-
-
-			if (roundedY >= 10) {
-				objekti.spelesTema.gameObject.SetActive (false);
-				objekti.spelesTema2.gameObject.SetActive (true);
-			} else if (roundedY < 10) {
-				objekti.spelesTema2.gameObject.SetActive (false);
-				objekti.spelesTema.gameObject.SetActive (true);
-			}
-
-		}
-	}
-
-
 	void parbauditSpelesBeigas()
 	{
 		foreach (Transform child in transform)
@@ -172,6 +154,18 @@ public class TetrisBloks : MonoBehaviour {
 			int roundedX = Mathf.RoundToInt(child.transform.position.x);
 			int roundedY = Mathf.RoundToInt(child.transform.position.y);
 
+			if (roundedY >= 10 && objekti.vaiIrVirs10 == 0)
+			{
+				objekti.spelesTema.gameObject.SetActive(false);
+				objekti.spelesTema2.gameObject.SetActive(true);
+				objekti.vaiIrVirs10++;
+			}
+			else if (roundedY < 10 && objekti.vaiIrVirs10 > 1) 
+			{
+				objekti.spelesTema2.gameObject.SetActive(false);
+				objekti.spelesTema.gameObject.SetActive(true);
+				objekti.vaiIrVirs10--;
+			}
 
 			if (roundedX < 0 || roundedX >= platums || roundedY < 0 || roundedY >= augstums)
 			{
@@ -182,7 +176,7 @@ public class TetrisBloks : MonoBehaviour {
 				objekti.segVards.gameObject.SetActive (true);
 				objekti.okPoga.gameObject.SetActive (true);
 				objekti.tekstsNr2.SetActive (true);
-				rezultatuskaititajs.rezTabTeksts.gameObject.SetActive(true);
+				teksti.rezTabTeksts.gameObject.SetActive(true);
 				return;
 			}
 
@@ -207,7 +201,7 @@ public class TetrisBloks : MonoBehaviour {
 
 
 			Debug.Log (objekti.reizesNotiritsLauks);
-			if (objekti.reizesNotiritsLauks == 12) {
+			if (objekti.reizesNotiritsLauks >= 15) {
 				objekti.spelesGrutiba++;
 				Debug.Log ("Nomainās gŗūtība");
 				Debug.Log (objekti.reizesNotiritsLauks);

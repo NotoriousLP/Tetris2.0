@@ -5,10 +5,8 @@ using UnityEngine.UI;
 
 public class rezultatuSkaititajs : MonoBehaviour {
 
-	public Text rezTabTeksts;
 
 	public Objekti objekti;
-
 	public int rezultats;
 
 	void Start(){
@@ -19,10 +17,6 @@ public class rezultatuSkaititajs : MonoBehaviour {
 	}
 
 
-	// Update is called once per frame
-	void Update () {
-		rezTabTeksts.text = "Tavi punkti: " + rezultats;
-	}
 
 	public void pievienotPunktus(int rindasNotiritas)
 	{
@@ -48,6 +42,7 @@ public class rezultatuSkaititajs : MonoBehaviour {
 			bazesRezultats = 700;
 			break;
 		case 6: //Neiespējami
+			rezultatuReizinatajs = 1500;
 			bazesRezultats = 1500;
 			break;
 		}

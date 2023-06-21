@@ -10,6 +10,7 @@ public class Teksti : MonoBehaviour {
 	public Text izdzestasRindas;
 
 	public Text rezultatuTeksts;
+	public Text rezTabTeksts;
 
 	public TetrisBloks tetrisBloks;
 	public Objekti objekti;
@@ -29,6 +30,7 @@ public class Teksti : MonoBehaviour {
 	void Update () {
 		rezultatuTeksts.text = "Rezultāts: " + rezultatuskaititajs.rezultats; 
 		izdzestasRindas.text = "Izdzēstas rindas: " + objekti.reizesNotiritsTekstam;
+		rezTabTeksts.text = "Tavi punkti: " + rezultatuskaititajs.rezultats;
 		switch (objekti.spelesGrutiba) {
 		case 1:
 			grutiba.text = "Grūtiba: Ļoti viegla";

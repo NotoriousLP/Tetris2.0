@@ -9,13 +9,8 @@ public class Objekti : MonoBehaviour {
 	public int reizesNotiritsLauks = 0;
 	public int reizesNotiritsTekstam = 0;
 	public bool speleBeigusies = false;
-	public bool irNolikts = false;
-
-	public bool spaceNospiests = false;
-	public float spaceSpiezLaiks;
-
-
 	public int spelesGrutiba;
+	public int vaiIrVirs10 = 0;
 
 
 	//Priekš tabulas, kad spēle beidzās
@@ -24,15 +19,14 @@ public class Objekti : MonoBehaviour {
 	public InputField segVards;
 	public Button okPoga;
 	public GameObject tekstsNr2;
-	public GameObject rezTeksts;
 	public GameObject rezApko;
 	public GameObject rezultatuRaksts;
 	public Button tabulasIziesana;
 
+
+	//Spēlei mūzika
 	public AudioSource spelesTema;
 	public AudioSource spelesTema2;
-
-
 
 	//Lai var izdabūt grūtību spēlei.
 	void Awake(){
