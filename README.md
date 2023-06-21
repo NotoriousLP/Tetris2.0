@@ -8,5 +8,5 @@
 - [x] Notīrās laukums
 - [x] Punktu sistēma pievienota
 - [ ] Turēšanas sistēma ievietota
-- [x] Skaņas sistēma
+- [ ] Skaņas sistēma
  
