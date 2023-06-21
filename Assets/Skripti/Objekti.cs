@@ -29,11 +29,15 @@ public class Objekti : MonoBehaviour {
 	public GameObject rezultatuRaksts;
 	public Button tabulasIziesana;
 
+	public AudioSource spelesTema;
+	public AudioSource spelesTema2;
+
 
 
 	//Lai var izdabūt grūtību spēlei.
 	void Awake(){
 		spelesGrutiba = PlayerPrefs.GetInt("Grutiba");
 	}
+
 
 }
