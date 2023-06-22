@@ -81,26 +81,6 @@ public class TetrisBloks : MonoBehaviour {
 			return 0.2f;
 		}
 	}
-
-	void uzreizBlokuKrisana()
-	{
-		while (derigsGajiens())
-		{
-			transform.position += new Vector3(0, -1, 0);
-			if (!derigsGajiens())
-			{
-				transform.position -= new Vector3(0, -1, 0);
-				break;
-			}
-		}
-
-		this.enabled = false;
-		addToGrid();
-		FindObjectOfType<GeneretBlokus>().jaunsTetromino();
-		parbauditRindas();
-		parbauditSpelesBeigas();
-		pagLaiks = Time.time;
-	}
 	
 	// Update is called once per frame
 	void Update () {

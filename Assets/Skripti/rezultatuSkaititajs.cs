@@ -27,22 +27,24 @@ public class rezultatuSkaititajs : MonoBehaviour {
 		switch (objekti.spelesGrutiba)
 		{
 		case 1: //ļoti viegls
+			rezultatuReizinatajs = 200;
 			bazesRezultats = 200;
 			break;
 		case 2: //viegls
-			rezultatuReizinatajs = 150;
+			rezultatuReizinatajs = 300;
 			bazesRezultats = 300;
+
 			break;
 		case 3: //Normāls
-			rezultatuReizinatajs = 200;
+			rezultatuReizinatajs = 400;
 			bazesRezultats = 400;
 			break;
 		case 4: //Grūts
-			rezultatuReizinatajs = 250;
+			rezultatuReizinatajs = 500;
 			bazesRezultats = 500;
 			break;
 		case 5: //Ļoti grūts
-			rezultatuReizinatajs = 400;
+			rezultatuReizinatajs = 700;
 			bazesRezultats = 700;
 			break;
 		case 6: //Neiespējami
@@ -50,8 +52,15 @@ public class rezultatuSkaititajs : MonoBehaviour {
 			bazesRezultats = 1500;
 			break;
 		}
-
-		pievienotRezultatam = bazesRezultats + (rindasNotiritas - 1) * rezultatuReizinatajs;
+		if (rindasNotiritas == 1) {
+			pievienotRezultatam = bazesRezultats;
+		} else if (rindasNotiritas == 2) {
+			pievienotRezultatam = bazesRezultats + (rindasNotiritas - 1) * rezultatuReizinatajs + 250;
+		} else if (rindasNotiritas == 3) {
+			pievienotRezultatam = bazesRezultats + (rindasNotiritas - 1) * rezultatuReizinatajs + 500;
+		} else if (rindasNotiritas == 4) {
+			pievienotRezultatam = bazesRezultats + (rindasNotiritas - 1) * rezultatuReizinatajs + 1000;
+		}
 		ieliktPunktusRez(pievienotRezultatam);
 	}
 	public void ieliktPunktusRez(int punkti)
