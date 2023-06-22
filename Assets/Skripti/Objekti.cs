@@ -27,6 +27,7 @@ public class Objekti : MonoBehaviour {
 	//Spēlei mūzika
 	public AudioSource spelesTema;
 	public AudioSource spelesTema2;
+	public AudioSource efekts;
 
 	//Lai var izdabūt grūtību spēlei.
 	void Awake(){

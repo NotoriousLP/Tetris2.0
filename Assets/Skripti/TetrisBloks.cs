@@ -28,7 +28,7 @@ public class TetrisBloks : MonoBehaviour {
 
 		konfiguretSpeli (objekti.spelesGrutiba);
 
-
+		objekti.efekts.Pause ();
 	}
 
 
@@ -97,11 +97,13 @@ public class TetrisBloks : MonoBehaviour {
 					transform.position -= new Vector3 (1, 0, 0);
 				}
 			} else if (Input.GetKeyDown (KeyCode.Z)) {
+				objekti.efekts.Play ();
 				transform.RotateAround (transform.TransformPoint (rotacijasPunkts), new Vector3 (0, 0, 1), 90);
 				if (!derigsGajiens ()) {
 					transform.RotateAround (transform.TransformPoint (rotacijasPunkts), new Vector3 (0, 0, 1), -90);
 				}
 			} else if (Input.GetKeyDown (KeyCode.X)) {
+				objekti.efekts.Play ();
 				transform.RotateAround (transform.TransformPoint (rotacijasPunkts), new Vector3 (0, 0, 1), -90);
 				if (!derigsGajiens ()) {
 					transform.RotateAround (transform.TransformPoint (rotacijasPunkts), new Vector3 (0, 0, 1), 90);
@@ -280,13 +282,21 @@ public class TetrisBloks : MonoBehaviour {
 		return true;
 	}
 
-	public void MuteUnmute(bool muted){
+	public void MuteUnmuteTheme(bool muted){
 		if (!muted) {
 			objekti.spelesTema.volume = 0f;
 			objekti.spelesTema2.volume = 0f;
 		} else {
-			objekti.spelesTema.volume = 0.3f;
-			objekti.spelesTema2.volume = 0.3f;
+			objekti.spelesTema.volume = 0.1f;
+			objekti.spelesTema2.volume = 0.1f;
+		}
+	}
+
+	public void MuteUnMuteEffect(bool muted){
+		if (!muted) {
+			objekti.efekts.volume = 0f;
+		} else {
+			objekti.efekts.volume = 0.1f;
 		}
 	}
 }
