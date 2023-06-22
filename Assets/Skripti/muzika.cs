@@ -11,7 +11,7 @@ public class muzika : MonoBehaviour {
 	private AudioSource AudioSource;
 
 
-	private void Start(){
+	 void Start(){
 		ObjektuMuzika = GameObject.FindWithTag ("gameMusic");
 		AudioSource = ObjektuMuzika.GetComponent<AudioSource>();
 
@@ -21,16 +21,16 @@ public class muzika : MonoBehaviour {
 	}
 
 
-	private void Update(){
+	 void Update(){
 		AudioSource.volume = MusicVolume;
 		PlayerPrefs.SetFloat ("volume", MusicVolume);
 	}
 
-	public void VolumeUpdater(float volume){
+	 void VolumeUpdater(float volume){
 		MusicVolume = volume;
 	}
 
-	public void MuteUnmute(bool muted){
+	 void MuteUnmute(bool muted){
 		Scene tagadejaisScene = SceneManager.GetActiveScene();
 		if (!muted) {
 			AudioSource.volume = 0f;

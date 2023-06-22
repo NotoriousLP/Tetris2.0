@@ -12,10 +12,12 @@ public class Teksti : MonoBehaviour {
 	public Text rezultatuTeksts;
 	public Text rezTabTeksts;
 
-	public TetrisBloks tetrisBloks;
+	//Datubāzei
+	public Text segVarduTeksts;
+	public Text punktuTeksts;
+
 	public Objekti objekti;
 	public rezultatuSkaititajs rezultatuskaititajs;
-
 
 
 
@@ -23,7 +25,7 @@ public class Teksti : MonoBehaviour {
 	void Start () {
 		rezultatuskaititajs = FindObjectOfType<rezultatuSkaititajs>();
 		objekti = FindObjectOfType<Objekti> ();
-		tetrisBloks = FindObjectOfType<TetrisBloks>();
+
 	}
 
 	// Update is called once per frame

@@ -13,14 +13,6 @@ public class datuGlabasana : MonoBehaviour {
 	public rezultatuSkaititajs rezultatskaititajs;
 	public Teksti teksti;
 
-	public Text segVarduTeksts;
-	public Text punktuTeksts;
-
-	public GameObject wireRowPrefab; 
-	public RectTransform wireListContainer;
-	public ScrollRect scrollRect;
-	public Scrollbar scrollbar;
-
 	private string dbName = "URI=file:rezultati.db";
 
 	void Start(){
@@ -72,8 +64,8 @@ public class datuGlabasana : MonoBehaviour {
 		
 	public void paraditRezDat(){
 
-		segVarduTeksts.text = "";
-		punktuTeksts.text = "";
+		teksti.segVarduTeksts.text = "";
+		teksti.punktuTeksts.text = "";
 
 		using (var connection = new SqliteConnection (dbName)) {
 			connection.Open ();
@@ -84,8 +76,8 @@ public class datuGlabasana : MonoBehaviour {
 				using (IDataReader reader = command.ExecuteReader ()) {
 
 					while (reader.Read ()) {
-						segVarduTeksts.text += reader ["segvards"] + "\n\n";
-						punktuTeksts.text += reader ["punkti"] + "\n\n";
+						teksti.segVarduTeksts.text += reader ["segvards"] + "\n\n";
+						teksti.punktuTeksts.text += reader ["punkti"] + "\n\n";
 					}
 
 					reader.Close ();
