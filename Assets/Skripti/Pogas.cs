@@ -13,7 +13,7 @@ public class Pogas : MonoBehaviour {
 		SceneManager.LoadScene ("spelesAina", LoadSceneMode.Single);
 	}
 	public void beigtSpeli(){
-		//Izies ārā no spēles
+		//Spéle tiek partraukta
 		Application.Quit ();
 	}
 	public void uzGalvenoIzvelni(){

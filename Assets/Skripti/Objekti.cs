@@ -24,12 +24,12 @@ public class Objekti : MonoBehaviour {
 	public Button tabulasIziesana;
 
 
-	//Spēlei mūzika
+	//Spēles mūzika
 	public AudioSource spelesTema;
 	public AudioSource spelesTema2;
 	public AudioSource efekts;
 
-	//Lai var izdabūt grūtību spēlei.
+	//Lai var pilniba funkcionet grūtību spēlei.
 	void Awake(){
 		spelesGrutiba = PlayerPrefs.GetInt("Grutiba");
 	}
